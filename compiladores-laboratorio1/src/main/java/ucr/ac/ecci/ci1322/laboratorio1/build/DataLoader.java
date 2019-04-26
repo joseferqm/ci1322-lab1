@@ -15,19 +15,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class DataLoader {
-
-    /**
-     * TODO: comentar
-     */
     private BookService libroService;
-
-    /**
-     * TODO: comentar
-     */
     private StudentService estudianteService;
 
     /**
-     * TODO: comentar
+     * Único constructor.
      */
     public DataLoader() {
         libroService = new BookServiceImpl();
@@ -35,7 +27,8 @@ public class DataLoader {
     }
 
     /**
-     * TODO: comentar
+     * Accede a los datos del workbook para cagarlos al mecanismo de persistencia a través de los servicios
+     * correspondientes.
      */
     public void cargarDatos() throws IOException {
         FileInputStream archivoInput = null;
@@ -60,8 +53,10 @@ public class DataLoader {
     }
 
     /**
-     * TODO: comentar
-     * @param hojaCalculo
+     * Accede a los datos de la hoja de cálculo de libros para cagarlos al mecanismo de persistencia a través del
+     * servicio para libros.
+     *
+     * @param hojaCalculo   la hoja de cálculo donde están los datos de los libros
      */
     private void cargarLibros(HSSFSheet hojaCalculo) {
         // La fila con índice 0 corresponde a los encabezados de columna.
@@ -88,8 +83,10 @@ public class DataLoader {
     }
 
     /**
-     * TODO: comentar
-     * @param hojaCalculo
+     * Accede a los datos de la hoja de cálculo de estudiantes para cagarlos al mecanismo de persistencia a través del
+     * servicio para estudiantes.
+     *
+     * @param hojaCalculo   la hoja de cálculo donde están los datos de los estudiantes
      */
     private void cargarEstudiantes(HSSFSheet hojaCalculo) {
         // La fila con índice 0 corresponde a los encabezados de columna.

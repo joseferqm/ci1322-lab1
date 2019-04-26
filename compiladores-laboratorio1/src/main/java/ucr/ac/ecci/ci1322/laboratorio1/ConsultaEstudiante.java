@@ -1,11 +1,8 @@
 package ucr.ac.ecci.ci1322.laboratorio1;
 
-import ucr.ac.ecci.ci1322.laboratorio1.core.book.service.BookService;
-import ucr.ac.ecci.ci1322.laboratorio1.core.book.service.BookServiceImpl;
 import ucr.ac.ecci.ci1322.laboratorio1.core.student.service.StudentService;
 import ucr.ac.ecci.ci1322.laboratorio1.core.student.service.StudentServiceImpl;
 import ucr.ac.ecci.ci1322.laboratorio1.model.Estudiante;
-import ucr.ac.ecci.ci1322.laboratorio1.model.Libro;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +20,6 @@ public class ConsultaEstudiante {
                 StudentService estudianteService = new StudentServiceImpl();
                 Estudiante estudiante = estudianteService.findById(linea);
                 if (estudiante != null) {
-                    // TODO: implementar despliegue de resultados
                     System.out.println(estudiante.toString());
                 } else {
                     System.out.println("No se encontró ningún estudiante con la cédula especificada.");

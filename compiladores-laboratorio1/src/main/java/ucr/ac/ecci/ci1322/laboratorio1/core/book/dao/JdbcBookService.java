@@ -10,7 +10,7 @@ public class JdbcBookService implements BookDao {
     private Connection conexion;
 
     /**
-     * TODO: comentar
+     * Único constructor.
      */
     public JdbcBookService() {
         try {
@@ -28,10 +28,8 @@ public class JdbcBookService implements BookDao {
     }
 
     /**
-     * Devuelve la instancia de <code>Libro</code> que se identifica
-     * por la hilera especificada dentro del mecanismo de persistencia,
-     * o <code>null</code> si el identificador no corresponde a ninguna
-     * instancia de <code>Libro</code>.
+     * Devuelve la instancia de <code>Libro</code> que se identifica por la hilera especificada dentro de la base de
+     * datos, o <code>null</code> si el identificador no corresponde a ninguna instancia de <code>Libro</code>.
      *
      * @param id    la hilera que identifica a un libro
      * @return      el libro que tiene el identificador especificado
@@ -73,10 +71,9 @@ public class JdbcBookService implements BookDao {
     }
 
     /**
-     * Agrega la instancia de <code>Libro</code> al mecanismo
-     * de persistencia y devuelve la hilera que identifica a la instancia.
+     * Agrega la instancia de <code>Libro</code> a la base de datos y devuelve la hilera que identifica a la instancia.
      *
-     * @param libro el libro que se agrega al mecanismo de persistencia
+     * @param libro el libro que se agrega a la base de datos
      * @return      la hilera que identifica al libro
      */
     public String create(Libro libro) {
@@ -118,22 +115,44 @@ public class JdbcBookService implements BookDao {
     }
 
     /**
-     * Actualiza la instancia de <code>Libro</code> en el mecanismo
-     * de persistencia.
+     * Actualiza la instancia de <code>Libro</code> en la base de datos.
      *
-     * @param libro
+     * @param libro el libro que se actualiza en la base de datos
      */
     public void update(Libro libro) {
-        // TODO: implementar
+        try {
+            Statement statement = conexion.createStatement();
+
+            String isbn = libro.getIsbn();
+
+            statement.executeUpdate("UPDATE Estudiante SET"
+                    + " Titulo = '" + libro.getTitulo() + "',"
+                    + " Anno = " + libro.getAnno() + ","
+                    + " Edicion = " + libro.getEdicion() + ","
+                    + " Editorial = '" + libro.getEditorial() + "' WHERE"
+                    + " Isbn = '" + isbn + "'"
+            );
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 
     /**
-     * Elimina la instancia de <code>Libro</code> del mecanismo
-     * de persistencia.
+     * Elimina la instancia de <code>Libro</code> de la base de datos.
      *
-     * @param libro
+     * @param libro el libro que se elimina de la base de datos
      */
     public void remove(Libro libro) {
-        // TODO: implementar
+        try {
+            Statement statement = conexion.createStatement();
+
+            String isbn = libro.getIsbn();
+
+            statement.executeUpdate("DELETE FROM Libro WHERE"
+                    + " Isbn = '" + isbn + "'"
+            );
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
     }
 }
